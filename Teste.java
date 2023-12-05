@@ -1,6 +1,5 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class Teste {
@@ -24,7 +23,7 @@ public class Teste {
         sistema.realizarConsulta(paciente2, medico2, "2023-11-01");*/
 
         Scanner input = new Scanner(System.in);
-        int funcao;
+        int funcao=0;
         int numero_pacientes=0;
         int numero_medicos=0;
         int numero_consultas=0;
@@ -38,12 +37,13 @@ public class Teste {
         while (funcao != 4)
         {
             
-            System.out.println("Menu: ");
-            System.out.print("1 - Criar Paciente");
-            System.out.print("2 - Criar Medico");
-            System.out.print("3 - Criar Consulta");
+            System.out.println("Menu:\n");
+            System.out.print("1 - Criar Paciente\n");
+            System.out.print("2 - Criar Medico\n");
+            System.out.print("3 - Criar Consulta\n");
             System.out.print("4 - Sair");
             funcao = input.nextInt();
+            input.nextLine();
         
             switch (funcao) {
                 case 1:
@@ -58,8 +58,12 @@ public class Teste {
                     int Dia_paciente = input.nextInt();
                     int Mes_paciente = input.nextInt();
                     int Ano_paciente = input.nextInt();
+
                     
-                    paciente[numero_pacientes] = new Paciente(name_paciente,CPF_paciente,RG_paciente,Dia_paciente,Mes_paciente,Ano_paciente);
+                    
+                    paciente[numero_pacientes] = new Paciente(name_paciente,CPF_paciente,RG_paciente,Dia_paciente,Mes_paciente,Ano_paciente,numero_pacientes);
+                    paciente[numero_pacientes].Leitura();
+                    sistema.cadastrarPaciente(paciente[numero_pacientes]);
                     numero_pacientes++;
                                        
                 
@@ -69,6 +73,8 @@ public class Teste {
                     
                     System.out.println("Qual o nome do Medico? ");
                     String name_medico = input.nextLine();
+                    System.out.println("Qual a especialidae do Medico? ");
+                    String especialidade = input.nextLine();
                     System.out.println("Qual o CPF do Medico? ");
                     int CPF_medico = input.nextInt();
                     System.out.println("Qual o RG do Medico?  ");
@@ -77,10 +83,11 @@ public class Teste {
                     int Dia_medico = input.nextInt();
                     int Mes_medico = input.nextInt();
                     int Ano_medico = input.nextInt();
-                    System.out.println("Qual a especialidae do Medico? ");
-                    String especialidade = input.nextLine();
+                    
 
                     medico[numero_medicos] = new Medico(name_medico,CPF_medico,RG_medico,Dia_medico,Mes_medico,Ano_medico,especialidade);
+
+                    sistema.cadastrarMedico(medico[numero_medicos]);
                     numero_medicos++;
 
                     break;
@@ -88,31 +95,55 @@ public class Teste {
                 case 3:
 
                     System.out.println("Criando Consulta...");
-                    System.out.println("Avaliação dos Sintomas");
-                    System.out.println(""); //formulário
+                    String resultado;
+                    String x,y; //x = nome do paciente  y = nome do medico
+                    int paciente_index=0, medico_index=0;
+                    int sinal_paciente=-1, sinal_medico=-1;
+
+                    System.out.println("Qual o nome do Paciente em que deseja add na consulta? ");
+                    x = input.nextLine();
+                    System.out.println("Qual o nome do Medico em que deseja add na consulta? ");
+                    y = input.nextLine();
+
+                    for(int i=0;i<numero_pacientes;i++)
+                    {
+                        if(paciente[i].getNome().equals(x))
+                        {
+                            paciente_index = paciente[i].getIndex();
+                            sinal_paciente = 1;
+                        }
+                        
+                    }
+
+                    for(int i=0;i<numero_medicos;i++)
+                    {
+                        if(medico[i].getNome().equals(y))
+                        {
+                            medico_index = medico[i].getIndex();
+                            sinal_medico = 1;
+                        }
+                        
+                    }
 
 
-                    consulta[numero_consultas] = new Consultas(paciente[],medico[],vetor_formularios[numero_consultas],)
+                    if (sinal_paciente == 1 && sinal_medico == 1)
+                    {
+                    sistema.realizarConsulta(paciente[paciente_index],medico[medico_index],resultado);
                     numero_consultas++;
+                    }
+                    else{
+                    System.out.println("Paciente ou Medico nao cadastrado no sistema! Tente Novamente!\n");
+                    }
                     break;
 
-                
+                case 4: 
+                    return;
                 default:
                     System.out.print("Função Inexistente! Tente Novamente!");
                     break;
         }
             
         }
-        
-
-
-
-            
-        
-
-
-
-
 
     }
 }
