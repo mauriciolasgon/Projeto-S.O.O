@@ -5,8 +5,9 @@ public class Medico
     private String nome;
     private int cpf;
     private int rg;
-    private int[] data_nascimento;
+    private int[] data_nascimento = new int[3];
     private String especialidade;
+    private int index;
 
     public Medico (String nome, int cpf, int rg, int dia, int mes, int ano, String especialidade)
     {
@@ -27,6 +28,11 @@ public class Medico
     public String getEspecialidade()
     {
         return especialidade;
+    }
+
+    public int getIndex()
+    {
+        return index;
     }
 
 }
