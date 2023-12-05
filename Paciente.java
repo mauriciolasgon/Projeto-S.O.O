@@ -7,9 +7,10 @@ public class Paciente
     private int cpf;
     private int rg;
     private int[] data_nascimento = new int[3];
+    private int index;
     private int[] avaliacao = new int[20];
 
-    public Paciente (String nome, int cpf, int rg, int dia, int mes, int ano)
+    public Paciente (String nome, int cpf, int rg, int dia, int mes, int ano, int index)
     {
         this.nome = nome;
         this.cpf = cpf;
@@ -17,6 +18,7 @@ public class Paciente
         this.data_nascimento[0] = dia;
         this.data_nascimento[1] = mes;
         this.data_nascimento[2] = ano;
+        this.index = index;
     }
 
     void Leitura ()
@@ -73,6 +75,11 @@ public class Paciente
     public String getNome()
     {
         return nome;
+    }
+
+    public int getIndex()
+    {
+        return index;
     }
 
     
