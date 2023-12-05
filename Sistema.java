@@ -24,9 +24,9 @@ public class Sistema
         medicos.add(medico);
     }
 
-    public void realizarConsulta(Paciente paciente, Medico medico, String data) 
+    public void realizarConsulta(Paciente paciente, Medico medico, String resultado) 
     {
-        Consulta consulta = new Consulta(paciente, medico, data);
+        Consulta consulta = new Consulta(paciente, medico, resultado);
         consultas.add(consulta);
     }
 
